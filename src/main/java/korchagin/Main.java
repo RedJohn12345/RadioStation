@@ -14,16 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Main {
-
-/*    @Controller
-    private static MusicRecordingController mrc;
-
-    @Controller
-    private static AlbumController ac;
-
-    @Controller
-    private static PersonController pc;*/
-
+    
     @DependencyInjection
     private static MusicRecordingDaoCSV mrc;
 
