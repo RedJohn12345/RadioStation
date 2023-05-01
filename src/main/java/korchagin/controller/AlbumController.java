@@ -1,6 +1,6 @@
 package korchagin.controller;
 
-import korchagin.dao.AlbumDaoCSV;
+import korchagin.dao.AlbumDao;
 import korchagin.model.Album;
 import korchagin.reflection.Component;
 import korchagin.reflection.DependencyInjection;
@@ -12,7 +12,11 @@ import java.util.Optional;
 public class AlbumController {
 
     @DependencyInjection
-    private AlbumDaoCSV dao;
+    private AlbumDao dao;
+
+    public AlbumDao getDao() {
+        return dao;
+    }
 
     public AlbumController() throws IOException {
     }

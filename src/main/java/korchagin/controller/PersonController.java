@@ -1,5 +1,7 @@
 package korchagin.controller;
 
+import korchagin.dao.AlbumDao;
+import korchagin.dao.PersonDao;
 import korchagin.dao.PersonDaoCSV;
 import korchagin.model.musician.Person;
 import korchagin.reflection.Component;
@@ -11,9 +13,10 @@ import java.util.Optional;
 @Component
 public class PersonController {
     @DependencyInjection
-    private PersonDaoCSV dao;
+    private PersonDao dao;
 
-    public PersonController() throws IOException {
+    public PersonDao getDao() {
+        return dao;
     }
 
     public Optional<Person> get(Long personId) {

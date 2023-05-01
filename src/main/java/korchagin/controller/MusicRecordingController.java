@@ -1,6 +1,8 @@
 package korchagin.controller;
 
+import korchagin.dao.MusicRecordingDao;
 import korchagin.dao.MusicRecordingDaoCSV;
+import korchagin.dao.PersonDao;
 import korchagin.model.MusicRecording;
 import korchagin.reflection.Component;
 import korchagin.reflection.DependencyInjection;
@@ -12,14 +14,10 @@ import java.util.Optional;
 public class MusicRecordingController {
 
     @DependencyInjection
-    private MusicRecordingDaoCSV dao;
+    private MusicRecordingDao dao;
 
-    public MusicRecordingController() throws IOException {
-    }
-
-
-    public MusicRecordingController(MusicRecordingDaoCSV dao) {
-        this.dao = dao;
+    public MusicRecordingDao getDao() {
+        return dao;
     }
 
     public Optional<MusicRecording> get(Long musicRecordingId) {
