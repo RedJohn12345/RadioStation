@@ -5,6 +5,8 @@ import korchagin.reflection.Component;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -20,7 +22,7 @@ public class AlbumDao implements DAO<Long, Album> {
     public void put(Album object) {
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO Album (name, year) VALUES (?, ?)");
+                    "INSERT INTO \"Album\" (name, year) VALUES (?, ?)");
 
             statement.setString(1, object.getName());
             statement.setInt(2, object.getYear());
@@ -36,7 +38,7 @@ public class AlbumDao implements DAO<Long, Album> {
     @Override
     public Optional<Album> get(Long key) {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Album WHERE id = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM \"Album\" WHERE id = ?");
             statement.setInt(1, key.intValue());
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
@@ -47,6 +49,27 @@ public class AlbumDao implements DAO<Long, Album> {
             album.setIdentity(id);
 
             return Optional.of(album);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Optional<List<Album>> getAll() {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM \"Album\"");
+            List<Album> albums = new ArrayList<>();
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Long id = resultSet.getLong("id");
+                String name = resultSet.getString("name");
+                Integer year = resultSet.getInt("year");
+                Album album = new Album(name, year);
+                album.setIdentity(id);
+                albums.add(album);
+            }
+
+            return Optional.of(albums);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

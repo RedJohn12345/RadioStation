@@ -22,7 +22,7 @@ import java.util.List;
 public class Main {
     
     @DependencyInjection
-    private static MusicRecordingDaoCSV mrc;
+    private static MusicRecordingDaoCSV mr;
 
     @DependencyInjection
     private static AlbumDaoCSV ac;
@@ -68,22 +68,24 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Album al = albumController.get(7L).get();
-        Person dora = personController.get(1L).get();
-        Person maybebaby = personController.get(2L).get();
-        MusicRecording barbi = new MusicRecording(MusicGenre.CUTE_ROCK, "BarbiSize", new HashSet<Person>(List.of(maybebaby)),
-                new HashSet<Person>(List.of(dora)), al, 3);
+//        Album al = new Album("God, save Cute-rock", 2020);
+//        Person dora = new Person("Daria", "Shihanova", "Dora");
+//        Person maybebaby = new Person("Victoria", "Lysyuk", "MaybeBaby");
+//        MusicRecording barbi = new MusicRecording(MusicGenre.CUTE_ROCK, "BarbiSize", new HashSet<Person>(List.of(maybebaby)),
+//                new HashSet<Person>(List.of(dora)), al, 3);
 //        ac.put(al);
 //        pc.put(dora);
 //        pc.put(maybebaby);
 //
 //        barbi.setIdentity(1L);
 //        mrc.put(barbi);
-//
+
 //        System.out.println(mrc.get(1L).get());
 
-        barbi.setIdentity(3L);
+        //albumController.put(al);
+        //personController.put(dora);
+        //personController.put(maybebaby);
 
-        musicRecordingController.put(barbi);
+        //musicRecordingController.put(barbi);
     }
 }
