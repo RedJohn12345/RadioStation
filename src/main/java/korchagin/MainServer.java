@@ -1,34 +1,20 @@
 package korchagin;
-
+import jakarta.servlet.Servlet;
 import korchagin.controller.AlbumController;
 import korchagin.controller.MusicRecordingController;
 import korchagin.controller.PersonController;
-import korchagin.dao.AlbumDaoCSV;
-import korchagin.dao.MusicRecordingDaoCSV;
-import korchagin.dao.PersonDaoCSV;
-import korchagin.model.Album;
-import korchagin.model.MusicRecording;
-import korchagin.model.enums.MusicGenre;
-import korchagin.model.musician.Person;
 import korchagin.reflection.ApplicationContext;
 import korchagin.reflection.DependencyInjection;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.List;
 
-public class Main {
-    
-    @DependencyInjection
-    private static MusicRecordingDaoCSV mr;
+public class MainServer {
 
-    @DependencyInjection
-    private static AlbumDaoCSV ac;
-
-    @DependencyInjection
-    private static PersonDaoCSV pc;
 
     @DependencyInjection
     private static AlbumController albumController;
@@ -61,31 +47,22 @@ public class Main {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        albumController.getDao().setConnection(connection);
         personController.getDao().setConnection(connection);
+        albumController.getDao().setConnection(connection);
         musicRecordingController.getDao().setConnection(connection);
     }
 
-    public static void main(String[] args) {
-//        Album al = new Album("God, save Cute-rock", 2020);
-//        Person dora = new Person("Daria", "Shihanova", "Dora");
-//        Person maybebaby = new Person("Victoria", "Lysyuk", "MaybeBaby");
-//        MusicRecording barbi = new MusicRecording(MusicGenre.CUTE_ROCK, "BarbiSize", new HashSet<Person>(List.of(maybebaby)),
-//                new HashSet<Person>(List.of(dora)), al, 3);
-//        ac.put(al);
-//        pc.put(dora);
-//        pc.put(maybebaby);
-//
-//        barbi.setIdentity(1L);
-//        mrc.put(barbi);
+    public static void main(String[] args) throws Exception {
+        Server server = new Server(8080);
 
-//        System.out.println(mrc.get(1L).get());
+        ServletContextHandler servletContextHandler = new ServletContextHandler();
+        servletContextHandler.setContextPath("/api");
 
-        //albumController.put(al);
-        //personController.put(dora);
-        //personController.put(maybebaby);
+        servletContextHandler.addServlet(new ServletHolder(albumController), "/album/*");
 
-        //musicRecordingController.put(barbi);
+        server.setHandler(servletContextHandler);
+
+        server.start();
+        server.join();
     }
 }

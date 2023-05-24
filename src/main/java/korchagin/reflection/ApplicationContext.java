@@ -116,7 +116,6 @@ public class ApplicationContext {
             return Class.forName(packageName + "."
                     + className.substring(0, className.lastIndexOf('.')));
         } catch (ClassNotFoundException e) {
-
         }
         return null;
     }

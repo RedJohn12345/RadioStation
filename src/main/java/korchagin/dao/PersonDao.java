@@ -23,7 +23,7 @@ public class PersonDao implements DAO<Long, Person> {
     public void put(Person object) {
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO \"Person\" (name, surname, nickname) VALUES (?, ?, ?)");
+                    "INSERT INTO \"person\" (name, surname, nickname) VALUES (?, ?, ?)");
 
             statement.setString(1, object.getName());
             statement.setString(2, object.getSurname());
@@ -39,7 +39,7 @@ public class PersonDao implements DAO<Long, Person> {
     @Override
     public Optional<Person> get(Long key) {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM \"Person\" WHERE id = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM \"person\" WHERE id = ?");
             statement.setInt(1, key.intValue());
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();

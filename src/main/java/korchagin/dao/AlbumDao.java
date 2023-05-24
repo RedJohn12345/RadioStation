@@ -22,7 +22,7 @@ public class AlbumDao implements DAO<Long, Album> {
     public void put(Album object) {
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO \"Album\" (name, year) VALUES (?, ?)");
+                    "INSERT INTO \"album\" (name, year) VALUES (?, ?)");
 
             statement.setString(1, object.getName());
             statement.setInt(2, object.getYear());
@@ -38,7 +38,7 @@ public class AlbumDao implements DAO<Long, Album> {
     @Override
     public Optional<Album> get(Long key) {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM \"Album\" WHERE id = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM \"album\" WHERE id = ?");
             statement.setInt(1, key.intValue());
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
@@ -57,7 +57,7 @@ public class AlbumDao implements DAO<Long, Album> {
 
     public Optional<List<Album>> getAll() {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM \"Album\"");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM \"album\"");
             List<Album> albums = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
