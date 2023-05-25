@@ -15,6 +15,8 @@ public class Person implements UserRequestComponent, IdentityInterface<Long> {
         this.nickname = nickname;
     }
 
+    public Person() {}
+
     public Person(String name, String surname) {
         this.name = name;
         this.surname = surname;

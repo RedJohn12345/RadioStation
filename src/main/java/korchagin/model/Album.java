@@ -14,6 +14,8 @@ public class Album implements UserRequestComponent, IdentityInterface<Long> {
         setYear(year);
     }
 
+    public Album() {}
+
     public String getName() {
         return name;
     }

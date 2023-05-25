@@ -67,10 +67,10 @@ public class MainJDBC {
 //        dora = personController.get(8L).get();
 //        maybebaby = personController.get(9L).get();
 
-        MusicRecording barbi = new MusicRecording(MusicGenre.CUTE_ROCK, "BarbiSize", new HashSet<Person>(List.of(maybebaby)),
-                new HashSet<Person>(List.of(dora)), al, 3);
-
-        musicRecordingController.put(barbi);
-        System.out.println(musicRecordingController.get(10L));
+//        MusicRecording barbi = new MusicRecording(MusicGenre.CUTE_ROCK, "BarbiSize", new HashSet<Person>(List.of(maybebaby)),
+//                new HashSet<Person>(List.of(dora)), al, 3);
+//
+//        musicRecordingController.put(barbi);
+//        System.out.println(musicRecordingController.get(10L));
     }
 }

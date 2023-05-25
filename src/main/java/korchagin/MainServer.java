@@ -58,7 +58,9 @@ public class MainServer {
         ServletContextHandler servletContextHandler = new ServletContextHandler();
         servletContextHandler.setContextPath("/api");
 
-        servletContextHandler.addServlet(new ServletHolder(albumController), "/album/*");
+        servletContextHandler.addServlet(new ServletHolder(albumController), "/album");
+        servletContextHandler.addServlet(new ServletHolder(personController), "/person");
+        servletContextHandler.addServlet(new ServletHolder(musicRecordingController), "/music_recording");
 
         server.setHandler(servletContextHandler);
 
